@@ -50,13 +50,13 @@ jobs:
       - name: Publish
         uses: EasyDesk/action-dotnet-publish@v1
         with:
-          output-dir: ${{ input.output-dir }}
-          path: ${{ input.project-name }}
+          output-dir: ${{ inputs.output-dir }}
+          path: ${{ inputs.project-name }}
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: build-artifacts
-          path: ${{ input.output-dir }}
+          path: ${{ inputs.output-dir }}
   release:
     name: GitHub Release
     runs-on: ubuntu-20.04
@@ -102,4 +102,4 @@ jobs:
         uses: Azure/functions-action@v1
         with:
           package: .
-          app-name: ${{ input.azure-functionapp-name }}
+          app-name: ${{ inputs.azure-functionapp-name }}
