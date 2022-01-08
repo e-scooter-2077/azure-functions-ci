@@ -1,14 +1,25 @@
 name: Azure Function Continuous Integration
 
-# env:
-#   OUTPUT_DIR: publish
-#   RELEASE_PREFIX: Manage Devices Functions
-#   AZURE_FUNCTIONAPP_NAME: 'scooter-physical-control-manage-devices'
-#   PROJECT_NAME: 'EScooter.PhysicalControl.ManageDevices'
-
 on:
-  
-      
+  workflow_call:
+    inputs:
+      release-prefix:
+        type: string
+        required: true
+      project-name:
+        type: string
+        required: true
+      azure-functionapp-name:
+        type: string
+        required: false
+      output-dir:
+        type: string
+        required: false
+        default: publish
+    secrets:
+      azure-credentials:
+        required: false
+
 jobs:
   build:
     name: Build
@@ -17,7 +28,7 @@ jobs:
       version: ${{ steps.semver.outputs.version }}
       should-release: ${{ steps.semver.outputs.should-release }}
       is-prerelease: ${{ steps.semver.outputs.is-github-prerelease }}
-      should-deploy: ${{ env.AZURE_FUNCTIONAPP_NAME != '' }}
+      should-deploy: ${{ inputs.azure-functionapp-name != '' }}
     steps:
       - id: semver
         name: Checkout
@@ -39,13 +50,13 @@ jobs:
       - name: Publish
         uses: EasyDesk/action-dotnet-publish@v1
         with:
-          output-dir: ${{ env.OUTPUT_DIR }}
-          path: ${{ env.PROJECT_NAME }}
+          output-dir: ${{ input.output-dir }}
+          path: ${{ input.project-name }}
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: build-artifacts
-          path: ${{ env.OUTPUT_DIR }}
+          path: ${{ input.output-dir }}
   release:
     name: GitHub Release
     runs-on: ubuntu-20.04
@@ -86,9 +97,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: ${{ secrets.azure-credentials }}
       - name: Deploy to Function App
         uses: Azure/functions-action@v1
         with:
           package: .
-          app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+          app-name: ${{ input.azure-functionapp-name }}
