@@ -6,7 +6,7 @@ read -r -d '' MARKDOWN <<-EOF
 [![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/__REPLACE_USER_REPO__?style=plastic)](https://github.com/__REPLACE_USER_REPO__/pulls)
 [![GitHub](https://img.shields.io/github/license/__REPLACE_USER_REPO__?style=plastic)](/LICENSE)
 [![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/__REPLACE_USER_REPO__?include_prereleases&style=plastic)](https://github.com/__REPLACE_USER_REPO__/releases)
-[![Documentation](https://img.shields.io/badge/documentation-click%20here-informational)](https://e-scooter-2077.github.io/documentation/)
+[![Documentation](https://img.shields.io/badge/documentation-click%20here-informational?style=plastic)](https://e-scooter-2077.github.io/documentation/)
 EOF
 
 RESULT=${MARKDOWN//__REPLACE_USER_REPO__/"${PROJECT#/%/}"}
