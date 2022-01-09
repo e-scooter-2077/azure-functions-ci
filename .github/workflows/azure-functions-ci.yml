@@ -48,8 +48,8 @@ jobs:
           build-args: '/p:ContinuousIntegrationBuild=true'
       - name: Test
         uses: EasyDesk/action-dotnet-test@v1
-        with:
-          test-args: /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./coverage/' /p:DeterministicReport=true
+        #with:
+          #test-args: /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./coverage/' /p:DeterministicReport=true
       - name: Publish
         uses: EasyDesk/action-dotnet-publish@v1
         with:
