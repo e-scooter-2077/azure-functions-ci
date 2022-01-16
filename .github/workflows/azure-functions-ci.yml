@@ -110,6 +110,7 @@ jobs:
   analyze:
     name: Analyze code with CodeQL
     runs-on: ubuntu-latest
+    continue-on-error: true
     permissions:
       actions: read
       contents: read
