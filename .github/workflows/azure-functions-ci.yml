@@ -33,14 +33,14 @@ jobs:
       - id: semver
         name: Checkout
         uses: EasyDesk/action-semver-checkout@v1
-      - name: Setup .NET Core 3 SDK
+#       - name: Setup .NET Core 3 SDK
+#         uses: actions/setup-dotnet@v1
+#         with:
+#           dotnet-version: 3.x
+      - name: Setup .NET 6 SDK
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.x
-      - name: Setup .NET 5 SDK
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 5.x
+          dotnet-version: 6.x
       - name: Build sources
         uses: EasyDesk/action-dotnet-build@v1
         with:
@@ -89,14 +89,14 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: build-artifacts
-      - name: Setup .NET Core 3 SDK
+#       - name: Setup .NET Core 3 SDK
+#         uses: actions/setup-dotnet@v1
+#         with:
+#           dotnet-version: 3.x
+      - name: Setup .NET 6 SDK
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.x
-      - name: Setup .NET 5 SDK
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 5.x
+          dotnet-version: 6.x
       - name: Login to Azure
         uses: azure/login@v1
         with:
@@ -125,14 +125,14 @@ jobs:
       with:
         languages: csharp
         queries: security-and-quality
-    - name: Setup .NET Core 3 SDK
+#     - name: Setup .NET Core 3 SDK
+#       uses: actions/setup-dotnet@v1
+#       with:
+#         dotnet-version: 3.x
+    - name: Setup .NET 6 SDK
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.x
-    - name: Setup .NET 5 SDK
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.x
+        dotnet-version: 6.x
     - name: Build sources
       uses: EasyDesk/action-dotnet-build@v1
       with:
